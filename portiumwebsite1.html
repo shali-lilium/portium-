@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portium | Seamless Access. Smart Management. by Lilium Solutions</title>
+    
+    <!-- Fonts: Inter for English, Assistant for Hebrew -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Portium Design System Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            lilium: '#0A2540',
+                            tech: '#2563EB',
+                            techHover: '#1D4ED8',
+                            bgLight: '#F8FAFC',
+                            textMain: '#1F2937',
+                            textMuted: '#6B7280'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Assistant', 'Inter', 'sans-serif'], 
+                    },
+                    boxShadow: {
+                        'card': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
+                        'cardHover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        'mockup': '0 25px 50px -12px rgba(0, 0, 0, 0.15)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: theme('colors.brand.textMain');
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+        }
+
+        /* Focus & Accessibility */
+        *:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4);
+            border-radius: 0.25rem;
+        }
+
+        /* Micro-interactions */
+        .interactive-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .interactive-card:hover {
+            transform: translateY(-6px);
+            box-shadow: theme('boxShadow.cardHover');
+        }
+
+        .btn-primary {
+            transition: all 0.2s ease;
+        }
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+
+        /* Hero Background Pattern */
+        .hero-pattern {
+            background-color: #ffffff;
+            background-image: radial-gradient(theme('colors.gray.200') 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        /* Input fields */
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            background-color: #F9FAFB;
+            transition: all 0.2s;
+            font-family: 'Assistant', sans-serif;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: theme('colors.brand.tech');
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            background-color: #FFFFFF;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-brand-tech selection:text-white">
+
+    <!-- ========================================== -->
+    <!-- HEADER (Sticky & Accessible)               -->
+    <!-- ========================================== -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex-shrink-0 flex items-baseline gap-1.5 group focus-visible:ring-4 focus-visible:ring-blue-300 rounded p-1">
+                    <span class="text-3xl font-bold tracking-tight text-brand-lilium font-['Inter'] group-hover:text-brand-tech transition-colors">Portium</span>
+                    <span class="text-xs font-semibold text-brand-textMuted leading-none font-['Inter'] border-r border-gray-300 pr-1.5 mr-1.5 hidden sm:inline-block">
+                        by <span class="text-brand-tech">Lilium</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex space-x-6 space-x-reverse items-center text-sm">
+                    <a href="#solutions" class="text-brand-textMain hover:text-brand-tech font-semibold transition-colors py-2 px-1">פתרונות</a>
+                    <a href="#analytics" class="text-brand-textMain hover:text-brand-tech font-semibold transition-colors py-2 px-1">אנליטיקה</a>
+                    <a href="#security" class="text-brand-textMain hover:text-brand-tech font-semibold transition-colors py-2 px-1">אבטחה</a>
+                    <a href="#onboarding" class="text-brand-textMain hover:text-brand-tech font-semibold transition-colors py-2 px-1">הטמעה</a>
+                    <a href="#case-studies" class="text-brand-textMain hover:text-brand-tech font-semibold transition-colors py-2 px-1">סיפורי לקוח</a>
+                    <a href="#support" class="text-brand-textMain hover:text-brand-tech font-semibold transition-colors py-2 px-1">תמיכה</a>
+                </nav>
+
+                <!-- CTA & Mobile Menu Toggle -->
+                <div class="flex items-center gap-4">
+                    <a href="#contact" class="hidden md:block text-brand-textMain font-medium hover:text-brand-tech transition-colors px-2 py-1 rounded text-sm">התחברות</a>
+                    <a href="#demo" class="btn-primary bg-brand-tech text-white font-semibold py-2.5 px-6 rounded-md hover:bg-brand-techHover shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm focus-visible:ring-4 focus-visible:ring-blue-300">
+                        Book a Demo
+                    </a>
+                    <!-- Mobile Hamburger -->
+                    <button id="mobile-menu-btn" class="lg:hidden text-brand-lilium p-2 focus-visible:ring-2 focus-visible:ring-brand-tech rounded">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-gray-100 px-4 py-4 space-y-2">
+            <a href="#solutions" class="block text-brand-textMain font-semibold py-2 hover:text-brand-tech">פתרונות</a>
+            <a href="#analytics" class="block text-brand-textMain font-semibold py-2 hover:text-brand-tech">אנליטיקה</a>
+            <a href="#onboarding" class="block text-brand-textMain font-semibold py-2 hover:text-brand-tech">הטמעה (Onboarding)</a>
+            <a href="#case-studies" class="block text-brand-textMain font-semibold py-2 hover:text-brand-tech">סיפורי לקוח</a>
+            <a href="#support" class="block text-brand-textMain font-semibold py-2 hover:text-brand-tech">תמיכה ומשאבים</a>
+            <a href="#contact" class="block text-brand-textMain font-semibold py-2 hover:text-brand-tech">צור קשר</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- ========================================== -->
+        <!-- 1. HERO SECTION                            -->
+        <!-- ========================================== -->
+        <section class="hero-pattern pt-20 pb-28 lg:pt-28 lg:pb-36 overflow-hidden border-b border-gray-100 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                    
+                    <div class="space-y-8">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-brand-tech text-sm font-semibold border border-blue-100">
+                            <span class="relative flex h-2 w-2">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-tech opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-tech"></span>
+                            </span>
+                            הדור החדש של הזדהות וגישה למאגרי מידע
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-lilium leading-tight tracking-tight">
+                            גישה חלקה לחוקרים.<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-l from-brand-tech to-cyan-500">ניהול חכם לספרנים.</span>
+                        </h1>
+                        
+                        <p class="text-lg sm:text-xl text-brand-textMuted leading-relaxed max-w-lg">
+                            אנו מסירים את החסמים הטכנולוגיים בדרך לידע. פלטפורמת Portium מספקת חוויית כניסה יחידה (SSO) חלקה, מאובטחת ויציבה לארגוני בריאות ואקדמיה.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                            <a href="#demo" class="btn-primary text-center bg-brand-tech text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl hover:bg-brand-techHover transform hover:-translate-y-1 text-lg">
+                                קבעו פגישת היכרות
+                            </a>
+                            <a href="#solutions" class="text-center text-brand-lilium font-bold py-4 px-8 rounded-lg hover:bg-gray-50 border-2 border-transparent hover:border-gray-200 transition-all text-lg">
+                                גלו איך זה עובד
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- UI Mockup & Abstract Elements -->
+                    <div class="relative lg:mr-8 mt-8 lg:mt-0">
+                        <div class="bg-white rounded-xl shadow-mockup border border-gray-200 overflow-hidden transform transition-transform hover:scale-[1.02] duration-500 relative bg-opacity-95 backdrop-blur-sm z-10">
+                            <div class="bg-gray-100 border-b border-gray-200 px-4 py-3 flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-400"></div><div class="w-3 h-3 rounded-full bg-yellow-400"></div><div class="w-3 h-3 rounded-full bg-green-400"></div>
+                                <div class="ml-4 bg-white px-3 py-1 rounded text-xs text-gray-400 font-['Inter'] flex-grow text-center">admin.portium.io/dashboard</div>
+                            </div>
+                            <div class="p-6 aspect-[4/3] bg-brand-bgLight flex flex-col">
+                                <div class="flex justify-between items-end mb-6">
+                                    <div class="w-1/3 h-6 bg-gray-200 rounded"></div>
+                                    <div class="w-1/4 h-8 bg-brand-tech rounded opacity-20"></div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-4 mb-6">
+                                    <div class="bg-white p-4 rounded shadow-sm border border-gray-100">
+                                        <div class="w-8 h-8 bg-blue-100 rounded mb-2"></div>
+                                        <div class="w-1/2 h-4 bg-gray-200 rounded mb-1"></div>
+                                        <div class="w-3/4 h-6 bg-gray-300 rounded"></div>
+                                    </div>
+                                    <div class="bg-white p-4 rounded shadow-sm border border-gray-100">
+                                        <div class="w-8 h-8 bg-green-100 rounded mb-2"></div>
+                                        <div class="w-1/2 h-4 bg-gray-200 rounded mb-1"></div>
+                                        <div class="w-3/4 h-6 bg-gray-300 rounded"></div>
+                                    </div>
+                                    <div class="bg-white p-4 rounded shadow-sm border border-gray-100">
+                                        <div class="w-8 h-8 bg-purple-100 rounded mb-2"></div>
+                                        <div class="w-1/2 h-4 bg-gray-200 rounded mb-1"></div>
+                                        <div class="w-3/4 h-6 bg-gray-300 rounded"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-white flex-grow rounded shadow-sm border border-gray-100 p-4">
+                                    <div class="flex items-end gap-2 h-full pt-4">
+                                        <div class="w-1/5 bg-brand-tech rounded-t h-full"></div>
+                                        <div class="w-1/5 bg-blue-300 rounded-t h-3/4"></div>
+                                        <div class="w-1/5 bg-indigo-200 rounded-t h-1/2"></div>
+                                        <div class="w-1/5 bg-purple-200 rounded-t h-1/4"></div>
+                                        <div class="w-1/5 bg-gray-200 rounded-t h-1/6"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Blobs -->
+                        <div class="absolute -top-10 -right-10 w-64 h-64 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                        <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 2. TRUST BAR & STATS                       -->
+        <!-- ========================================== -->
+        <section class="bg-white border-b border-gray-100 py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-center text-sm font-bold text-gray-400 mb-8 uppercase tracking-widest">נבחר על ידי ארגוני הבריאות והמחקר המובילים</p>
+                <div class="flex flex-wrap justify-center items-center gap-10 md:gap-20 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                    <div class="font-bold text-xl text-gray-800 flex items-center gap-2"><svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>כללית</div>
+                    <div class="font-bold text-xl text-gray-800 flex items-center gap-2"><svg class="w-6 h-6 text-blue-800" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm3-4H7v-2h8v2zm0-4H7V7h8v2z"/></svg>שיבא</div>
+                    <div class="font-bold text-xl text-gray-800 flex items-center gap-2"><svg class="w-6 h-6 text-cyan-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z"/></svg>בילינסון</div>
+                    <div class="font-bold text-xl text-gray-800 flex items-center gap-2"><svg class="w-6 h-6 text-indigo-700" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>קונסורציום הספריות</div>
+                </div>
+                
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mt-12 pt-10 border-t border-gray-100">
+                    <div><div class="text-3xl font-bold font-['Inter'] text-brand-lilium mb-1">100%</div><div class="text-sm font-medium text-brand-textMuted">תמיכה בהוצאות לאור (SAML/Proxy)</div></div>
+                    <div><div class="text-3xl font-bold font-['Inter'] text-brand-lilium mb-1">SSO</div><div class="text-sm font-medium text-brand-textMuted">חלוצי התחברות אחודה בארגונים</div></div>
+                    <div><div class="text-3xl font-bold font-['Inter'] text-brand-lilium mb-1">5M+</div><div class="text-sm font-medium text-brand-textMuted">העברות וגישות בשנה</div></div>
+                    <div><div class="text-3xl font-bold font-['Inter'] text-brand-lilium mb-1">24/7</div><div class="text-sm font-medium text-brand-textMuted">יציבות שרתים ותמיכה טכנית</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 3. SOLUTIONS (Z-Pattern & Comparisons)     -->
+        <!-- ========================================== -->
+        <section id="solutions" class="py-24 bg-brand-bgLight">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-lilium mb-4">פתרון ספק יחיד (Single Vendor Solution)</h2>
+                    <p class="text-brand-textMuted text-lg">שילוב מנצח של חווית משתמש מעולה לחוקרים ויכולות ניהול עוצמתיות לספרייה. הכל בפלטפורמה אחת מבוססת ענן.</p>
+                </div>
+
+                <!-- Librarian Focus -->
+                <div class="flex flex-col lg:flex-row gap-12 items-center mb-24">
+                    <div class="w-full lg:w-1/2 space-y-6">
+                        <span class="text-brand-tech font-bold tracking-wider uppercase text-sm block">למנהלי ספריות (Librarians)</span>
+                        <h3 class="text-3xl font-bold text-brand-lilium">ממשק ניהול אחוד ושליטה מלאה</h3>
+                        <p class="text-brand-textMuted leading-relaxed text-lg">
+                            שחררו את התלות בצוותי ה-IT. הפתרון של Portium מאפשר לכם לנהל הרשאות, משתמשים וספקי תוכן ממקום אחד מרכזי. 
+                            אנו תומכים ב-SAML, OpenID ובשרתי Proxy כך שאף מאגר מידע לא יישאר מאחור.
+                        </p>
+                        
+                        <!-- Comparison Table replacing bullet points -->
+                        <div class="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden text-sm">
+                            <table class="w-full text-right">
+                                <thead class="bg-gray-50 border-b border-gray-200">
+                                    <tr>
+                                        <th class="p-3 text-brand-textMuted font-semibold w-1/3">תכונה</th>
+                                        <th class="p-3 text-brand-tech font-bold w-1/3 border-r border-gray-200 bg-blue-50/50">Portium SSO</th>
+                                        <th class="p-3 text-brand-textMain font-semibold w-1/3 border-r border-gray-200">VPN / IP מסורתי</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    <tr>
+                                        <td class="p-3 font-medium text-brand-textMain">חוויית משתמש מרחוק</td>
+                                        <td class="p-3 border-r border-gray-200 bg-blue-50/50 text-green-600 font-medium">כניסה חלקה מדפדפן</td>
+                                        <td class="p-3 border-r border-gray-200 text-red-500">התקנת תוכנה / הגדרות רשת</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-brand-textMain">ניהול עצמאי</td>
+                                        <td class="p-3 border-r border-gray-200 bg-blue-50/50 text-gray-700">מלא לספרנים</td>
+                                        <td class="p-3 border-r border-gray-200 text-gray-500">תלוי בצוותי IT / תמיכה</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-brand-textMain">אבטחת מידע</td>
+                                        <td class="p-3 border-r border-gray-200 bg-blue-50/50 text-gray-700">תקני Enterprise</td>
+                                        <td class="p-3 border-r border-gray-200 text-gray-500">סיסמאות משותפות/חלשות</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl shadow-card border border-blue-100 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-white rounded-full mix-blend-overlay filter blur-xl opacity-50"></div>
+                            <svg class="w-16 h-16 text-brand-tech mb-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <h4 class="text-xl font-bold text-brand-lilium mb-2 relative z-10">מוכנים לעתיד ההזדהות</h4>
+                            <p class="text-brand-textMuted relative z-10">המערכת תומכת ב-Single Sign-On מלא, סנכרון מול Active Directory ארגוני וניהול הרשאות פרטני למחלקות שונות.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Researcher Focus -->
+                <div class="flex flex-col lg:flex-row-reverse gap-12 items-center">
+                    <div class="w-full lg:w-1/2 space-y-6">
+                        <span class="text-purple-600 font-bold tracking-wider uppercase text-sm block">לחוקרים ומשתמשי קצה (Researchers)</span>
+                        <h3 class="text-3xl font-bold text-brand-lilium">גישה אוניברסלית (Universal Access)</h3>
+                        <p class="text-brand-textMuted leading-relaxed text-lg">
+                            המטרה שלנו היא להסיר את החסמים ביניכם לבין הידע. עם Portium, החיפוש והקריאה של מאמרים הופכים לתהליך זורם וטבעי, ללא תלות במיקום או במכשיר.
+                        </p>
+                        <ul class="space-y-4 pt-2">
+                            <li class="flex items-start gap-3">
+                                <div class="mt-1 w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 flex-shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                                <div><strong class="text-brand-textMain">גישה מכל מכשיר:</strong> מחשב ביתי, טאבלט במחלקה או נייד בדרכים.</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-1 w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 flex-shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                                <div><strong class="text-brand-textMain">התחברות חלקה:</strong> הזדהות פעם אחת עם פרטי הארגון (SSO) לגישה לכל המאגרים.</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-1 w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 flex-shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                                <div><strong class="text-brand-textMain">שמירה על פרטיות:</strong> המערכת שומרת על זהותכם אנונימית מול הספקים החיצוניים.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-full lg:w-1/2">
+                        <div class="bg-white p-8 rounded-2xl shadow-card border border-gray-100 text-center hover-card-up">
+                            <div class="w-20 h-20 mx-auto rounded-full bg-gray-50 border-4 border-white shadow flex items-center justify-center mb-4">
+                                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                            </div>
+                            <h4 class="font-bold text-xl text-brand-lilium font-['Inter'] mb-1">Welcome, Dr. Levi</h4>
+                            <p class="text-sm text-brand-textMuted mb-6">Accessing via General Hospital Portal</p>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-green-50 text-green-700 p-3 rounded-lg border border-green-100 flex justify-between items-center text-sm font-semibold">
+                                    <span class="font-['Inter']">PubMed Central</span>
+                                    <span>מחובר <svg class="inline w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></span>
+                                </div>
+                                <div class="bg-green-50 text-green-700 p-3 rounded-lg border border-green-100 flex justify-between items-center text-sm font-semibold">
+                                    <span class="font-['Inter']">Elsevier ScienceDirect</span>
+                                    <span>מחובר <svg class="inline w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 4. ANALYTICS & SMART MANAGEMENT            -->
+        <!-- ========================================== -->
+        <section id="analytics" class="py-24 bg-white border-t border-b border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="w-16 h-16 mx-auto bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-lilium mb-6">דוחות וסטטיסטיקות לקבלת החלטות (Granular Stats)</h2>
+                <p class="text-brand-textMuted text-lg max-w-3xl mx-auto mb-12">
+                    קבלו תמונה שקופה ומדויקת של אופן השימוש במשאבי הספרייה שלכם. דשבורד האנליטיקה של Portium מציג נתונים מפולחים שעוזרים בהצדקת תקציבים, זיהוי כפילויות רכש ומניעת שימוש חריג. הנתונים ניתנים לייצוא למערכות BI.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 text-right hover-card-up">
+                        <h4 class="font-bold text-brand-textMain mb-2">שימוש לפי ספק</h4>
+                        <p class="text-sm text-brand-textMuted">זהו אילו מאגרים מספקים את התמורה הטובה ביותר להשקעה ואילו ספקים אפשר לצמצם.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 text-right hover-card-up">
+                        <h4 class="font-bold text-brand-textMain mb-2">פילוח משתמשים</h4>
+                        <p class="text-sm text-brand-textMuted">דוחות אנונימיים לפי מחלקות (למשל: קרדיולוגיה לעומת ילדים) להבנת צרכי המידע בארגון.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 text-right hover-card-up">
+                        <h4 class="font-bold text-brand-textMain mb-2">מניעת שימוש לרעה</h4>
+                        <p class="text-sm text-brand-textMuted">זיהוי אוטומטי של התחברויות חריגות או שיתוף סיסמאות כדי להגן על הרישיונות הארגוניים.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 5. SECURITY & TECH                         -->
+        <!-- ========================================== -->
+        <section id="security" class="py-24 bg-brand-lilium text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-2 block">אבטחת מידע וטכנולוגיה</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">סטנדרט האבטחה של עולמות ה-Enterprise</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        בנוי לעמוד בדרישות המחמירות ביותר של ארגוני בריאות, בתי חולים ומוסדות ציבוריים. אנו נוקטים בגישת Privacy-First.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6">
+                        <div class="w-16 h-16 mx-auto bg-brand-tech/20 rounded-full flex items-center justify-center mb-4 text-brand-tech">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">תקני ISO ו-SOC2</h3>
+                        <p class="text-gray-400 text-sm">התשתית עומדת בתקני ISO27001 ו-SOC2 Type 2 לשמירה מקסימלית על נתוני הארגון.</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="w-16 h-16 mx-auto bg-brand-tech/20 rounded-full flex items-center justify-center mb-4 text-brand-tech">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">הגנת פרטיות</h3>
+                        <p class="text-gray-400 text-sm">אנו מעבירים לספקים מזהים אנונימיים בלבד. מידע אישי מזהה (PII) נשאר בארגון.</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="w-16 h-16 mx-auto bg-brand-tech/20 rounded-full flex items-center justify-center mb-4 text-brand-tech">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 font-['Inter']">AI-Ready</h3>
+                        <p class="text-gray-400 text-sm">ארכיטקטורת ענן מודרנית המוכנה לאינטגרציות עתידיות של כלי בינה מלאכותית בחיפוש.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 6. ONBOARDING HUB                          -->
+        <!-- ========================================== -->
+        <section id="onboarding" class="py-24 bg-brand-bgLight">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-lilium mb-4">תהליך מעבר שקוף ופשוט (Onboarding)</h2>
+                    <p class="text-brand-textMuted text-lg">צוות המומחים שלנו מלווה אתכם יד ביד בכל שלבי ההטמעה. ללא השבתת שירות למשתמשים (Zero Disruption).</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <!-- Step 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center hover-card-up relative">
+                        <div class="w-8 h-8 mx-auto bg-brand-tech text-white rounded-full flex items-center justify-center font-bold text-sm mb-4">1</div>
+                        <h4 class="font-bold text-brand-lilium mb-2">פגישת התנעה</h4>
+                        <p class="text-xs text-brand-textMuted">הבנת תשתיות ה-IT, מטרות הארגון ורשימת ספקי התוכן הנוכחיים.</p>
+                        <div class="hidden md:block absolute top-10 left-[-15px] w-8 border-t-2 border-dashed border-gray-300"></div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center hover-card-up relative">
+                        <div class="w-8 h-8 mx-auto bg-brand-tech text-white rounded-full flex items-center justify-center font-bold text-sm mb-4">2</div>
+                        <h4 class="font-bold text-brand-lilium mb-2">הגדרת משתמשים</h4>
+                        <p class="text-xs text-brand-textMuted">חיבור לספריית הארגון (ADFS, Azure) להפעלת SSO מאובטח.</p>
+                        <div class="hidden md:block absolute top-10 left-[-15px] w-8 border-t-2 border-dashed border-gray-300"></div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center hover-card-up relative">
+                        <div class="w-8 h-8 mx-auto bg-brand-tech text-white rounded-full flex items-center justify-center font-bold text-sm mb-4">3</div>
+                        <h4 class="font-bold text-brand-lilium mb-2">הפעלת משאבים</h4>
+                        <p class="text-xs text-brand-textMuted">סנכרון של Portium מול כל ההוצאות לאור ומאגרי המידע שלכם.</p>
+                        <div class="hidden md:block absolute top-10 left-[-15px] w-8 border-t-2 border-dashed border-gray-300"></div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center hover-card-up relative">
+                        <div class="w-8 h-8 mx-auto bg-brand-tech text-white rounded-full flex items-center justify-center font-bold text-sm mb-4">4</div>
+                        <h4 class="font-bold text-brand-lilium mb-2">עדכון קישורים</h4>
+                        <p class="text-xs text-brand-textMuted">יצירת קישורי Redirector והטמעתם בפורטל הספרייה או באתר.</p>
+                        <div class="hidden md:block absolute top-10 left-[-15px] w-8 border-t-2 border-dashed border-gray-300"></div>
+                    </div>
+                    <!-- Step 5 -->
+                    <div class="bg-brand-lilium p-6 rounded-xl shadow-sm text-center hover-card-up">
+                        <div class="w-8 h-8 mx-auto bg-brand-tech text-white rounded-full flex items-center justify-center font-bold text-sm mb-4">5</div>
+                        <h4 class="font-bold text-white mb-2">השקה והדרכה</h4>
+                        <p class="text-xs text-gray-300">הדרכת צוות הספרייה, העברת ניהול ותקשור המהלך למשתמשים (Go-Live).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 7. CASE STUDIES (Clalit, Sheba etc.)       -->
+        <!-- ========================================== -->
+        <section id="case-studies" class="py-24 bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-lilium mb-4">סיפורי לקוח והצלחות</h2>
+                    <p class="text-brand-textMuted text-lg">ראו כיצד ארגוני מחקר ובריאות שדרגו את הגישה למידע באמצעות Portium.</p>
+                </div>
+
+                <!-- Featured Case Study -->
+                <div class="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden flex flex-col md:flex-row mb-8">
+                    <div class="p-8 md:p-12 md:w-2/3 space-y-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                            <span class="font-bold text-xl text-gray-800">שירותי בריאות כללית</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-lilium">"ירידה של 80% בפניות התמיכה (Helpdesk) לגישה מרחוק"</h3>
+                        <p class="text-brand-textMain leading-relaxed">
+                            האתגר: רופאים וחוקרים בכללית נדרשו להתחבר דרך VPN מיושן כדי לגשת למאגרי מידע מחוץ לרשת. התהליך היה איטי וגרר עומס תמיכה כבד.
+                        </p>
+                        <p class="text-brand-textMain leading-relaxed">
+                            הפתרון: מעבר למערכת Portium מבוססת SSO. החוקר מזוהה אוטומטית (SAML), ללא תלות במכשיר, תוך שמירה על תקני האבטחה המחמירים של הארגון.
+                        </p>
+                        <blockquote class="bg-white border-r-4 border-brand-tech p-4 rounded-l-lg italic text-brand-lilium font-medium shadow-sm mt-6">
+                            "המעבר ל-Portium היה מהפך. המשתמשים שלנו מקבלים את החומר שהם צריכים, מיד. גם כמות הבקשות לרישום לספרייה עלתה משמעותית."
+                            <footer class="mt-2 text-sm not-italic font-normal text-brand-textMuted">משה שמש, מנהל ספריות רפואיות</footer>
+                        </blockquote>
+                    </div>
+                    <div class="bg-blue-50 md:w-1/3 p-8 flex flex-col justify-center border-t md:border-t-0 md:border-r border-gray-200">
+                        <div class="mb-6">
+                            <p class="text-4xl font-black text-brand-tech mb-1">40%<span class="text-2xl">+</span></p>
+                            <p class="text-sm font-semibold text-gray-600">עלייה בשימוש במאגרים</p>
+                        </div>
+                        <div>
+                            <p class="text-4xl font-black text-brand-tech mb-1">15K</p>
+                            <p class="text-sm font-semibold text-gray-600">משתמשי קצה נתמכים</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Case Studies Grid -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover-card-up">
+                        <div class="font-bold text-lg text-brand-lilium mb-4 flex items-center gap-2">
+                            <svg class="w-6 h-6 text-cyan-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z"/></svg> בילינסון
+                        </div>
+                        <p class="text-brand-textMuted mb-4">"מעבר למערכת יציבה ושירות טכני מהיר ויעיל. הממשק החדש איפשר לנו לנהל את משאבי הספרייה בעצמאות וללא עיכובים של צוותי מחשוב מקומיים."</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover-card-up">
+                        <div class="font-bold text-lg text-brand-lilium mb-4 flex items-center gap-2">
+                            <svg class="w-6 h-6 text-indigo-700" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg> קונסורציום הספריות (אונ' ת"א)
+                        </div>
+                        <p class="text-brand-textMuted mb-4">"השמירה על אבטחת מידע וסודיות בסביבה רפואית-אקדמית היא קריטית. Portium מספקת שקט נפשי מלא עם תאימות לתקני פרטיות גלובליים (Privacy-First)."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 8. SUPPORT & RESOURCES HUB                 -->
+        <!-- ========================================== -->
+        <section id="support" class="py-24 bg-brand-bgLight">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-12 border-b border-gray-200 pb-4">
+                    <div>
+                        <h2 class="text-3xl font-bold text-brand-lilium mb-2">מרכז תמיכה ומשאבים</h2>
+                        <p class="text-brand-textMuted text-lg">אנחנו כאן כדי לעזור. מדריכים, פתרון תקלות ועדכוני מערכת.</p>
+                    </div>
+                    <a href="#" class="hidden md:flex text-brand-tech font-semibold items-center gap-1 hover:text-brand-techHover">
+                        לכל המאמרים בבלוג <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Troubleshooting -->
+                    <a href="#" class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover-card-up group block outline-none focus-visible:ring-4 focus-visible:ring-blue-300">
+                        <div class="w-12 h-12 rounded-full bg-red-50 text-red-500 flex items-center justify-center mb-4 group-hover:bg-red-500 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-brand-lilium mb-2">פתרון תקלות</h4>
+                        <p class="text-sm text-brand-textMuted">שכחתם סיסמה? חוקר לא מצליח להתחבר? מדריכים מהירים לפתרון תקלות נפוצות.</p>
+                    </a>
+                    
+                    <!-- Admin Training -->
+                    <a href="#" class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover-card-up group block outline-none focus-visible:ring-4 focus-visible:ring-blue-300">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 text-brand-tech flex items-center justify-center mb-4 group-hover:bg-brand-tech group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-brand-lilium mb-2">פורטל הדרכה לספרנים</h4>
+                        <p class="text-sm text-brand-textMuted">מרכז הידע: איך מוסיפים משתמש חדש, איך מפיקים דוח שימושים חודשי ועוד.</p>
+                    </a>
+
+                    <!-- Glossary / Blog -->
+                    <a href="#" class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover-card-up group block outline-none focus-visible:ring-4 focus-visible:ring-blue-300">
+                        <div class="w-12 h-12 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center mb-4 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-brand-lilium mb-2">מילון מונחים (Glossary)</h4>
+                        <p class="text-sm text-brand-textMuted">מה ההבדל בין VPN ל-SSO? מה זה SAML או Proxy? כל המושגים בשפה פשוטה.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 9. ABOUT & CONTACT                         -->
+        <!-- ========================================== -->
+        <section id="about" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="mb-16 text-center max-w-3xl mx-auto">
+                    <span class="text-brand-tech font-bold tracking-wider uppercase text-sm mb-2 block">אודות Lilium Solutions</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-lilium mb-4">הסיפור שלנו: מנגישים ידע אקדמי ורפואי</h2>
+                    <p class="text-brand-textMuted text-lg leading-relaxed">
+                        Lilium Solutions הוקמה מתוך תסכול אמיתי של חוקרים ורופאים שנתקלו בחסמים טכנולוגיים בדרך למאגרי מידע. 
+                        עם שנות ניסיון רבות של המייסד, מאיר ברנדויין, פיתחנו את Portium כדי לגשר על הפער הזה ולספק לארגוני אנטרפרייז כלי ניהול חזק ובטוח.
+                    </p>
+                </div>
+
+                <!-- Contact Block -->
+                <div id="contact" class="bg-brand-lilium rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
+                    
+                    <!-- Text Info -->
+                    <div class="w-full lg:w-5/12 p-10 lg:p-16 text-white flex flex-col justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')]">
+                        <h3 class="text-3xl font-bold mb-6">מוכנים לשדרג את הספרייה?</h3>
+                        <p class="text-blue-200 text-lg mb-8 leading-relaxed">
+                            קבעו איתנו פגישת היכרות קצרה. נציג כיצד Portium תחסוך לארגון שלכם זמן, כסף, וכאבי ראש טכניים.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <span class="font-['Inter']">sales@lilium.co.il</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="w-full lg:w-7/12 bg-white p-10 lg:p-16">
+                        <h3 class="text-2xl font-bold text-brand-lilium mb-6">השאירו פרטים ונחזור אליכם</h3>
+                        <form class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">שם מלא *</label>
+                                    <input type="text" class="input-field" placeholder="ישראל ישראלי" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">דוא"ל מוסדי *</label>
+                                    <input type="email" class="input-field" placeholder="name@hospital.org.il" required dir="ltr">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">שם המוסד / ארגון *</label>
+                                <input type="text" class="input-field" placeholder="הקלידו את שם המוסד" required>
+                            </div>
+                            <button type="button" class="w-full btn-primary bg-brand-tech text-white font-bold py-3.5 px-6 rounded-lg shadow-md hover:bg-brand-techHover mt-4 focus-visible:ring-4 focus-visible:ring-blue-300">
+                                תיאום הדגמה
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- 10. FOOTER & LEGAL                         -->
+    <!-- ========================================== -->
+    <footer class="bg-[#051525] text-gray-300 pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-12 border-b border-gray-800 pb-12">
+                
+                <!-- Brand Column -->
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-baseline gap-1.5 mb-4">
+                        <span class="text-3xl font-bold tracking-tight text-white font-['Inter']">Portium</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        מוצר הדגל של חברת Lilium Solutions. פלטפורמת ההזדהות המובילה לארגוני מחקר, בתי חולים ואקדמיה.
+                    </p>
+                    <!-- Security Badges mini -->
+                    <div class="flex items-center gap-4 mt-6">
+                        <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded border border-white/10">
+                            <svg class="w-4 h-4 text-brand-tech" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            <span class="text-xs font-bold font-['Inter']">ISO 27001</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded border border-white/10">
+                            <svg class="w-4 h-4 text-brand-tech" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            <span class="text-xs font-bold font-['Inter']">SOC 2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links Column 1 -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">מוצר וטכנולוגיה</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#solutions" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">ממשק ניהול לספרנים</a></li>
+                        <li><a href="#researchers" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">גישת חוקרים (SSO)</a></li>
+                        <li><a href="#analytics" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">אנליטיקה ודוחות</a></li>
+                        <li><a href="#security" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">אבטחת מידע</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Column 2 -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">חברה ולקוחות</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">אודות Lilium Solutions</a></li>
+                        <li><a href="#case-studies" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">סיפורי לקוח</a></li>
+                        <li><a href="#onboarding" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">תהליך הטמעה</a></li>
+                        <li><a href="#contact" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">צור קשר והדגמה</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Column 3 (Legal & Support) -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">משפטי ותמיכה</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#support" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">מרכז תמיכה</a></li>
+                        <li><a href="#" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">תנאי שימוש (Terms)</a></li>
+                        <li><a href="#" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">מדיניות פרטיות (Privacy)</a></li>
+                        <li><a href="#" class="hover:text-brand-tech transition-colors focus-visible:ring-2 rounded">הצהרת נגישות (Accessibility)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-['Inter']">
+                <p>&copy; 2026 Lilium Solutions Ltd. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Portium - Unified Digital Library Access.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
