@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portium Design System | Lilium Solutions</title>
+    
+    <!-- ייבוא פונטים: Inter לאנגלית ו-Assistant לעברית -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ייבוא Tailwind CSS לצורך עיצוב מהיר וגלובלי -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- הגדרות התאמה אישית של Tailwind בהתאם למסמך האפיון של Portium -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            lilium: '#0A2540', /* Lilium Blue - צבע תאגידי ראשי */
+                            tech: '#2563EB',   /* Tech Blue - צבע פעולה והנעה */
+                            techHover: '#1D4ED8',
+                            bgLight: '#F8FAFC', /* רקע אפור בהיר להפרדה */
+                            textMain: '#1F2937', /* אפור-פחם קריא לטקסט רץ */
+                            textMuted: '#6B7280' /* אפור בינוני לטקסט משני */
+                        }
+                    },
+                    fontFamily: {
+                        /* שילוב פונטים - קודם אנגלית ואז עברית */
+                        sans: ['Inter', 'Assistant', 'sans-serif'], 
+                    },
+                    boxShadow: {
+                        'card': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)', /* צללית עדינה כפי שהוגדר */
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* הגדרות בסיס גלובליות נקיות */
+        body {
+            background-color: theme('colors.brand.bgLight');
+            color: theme('colors.brand.textMain');
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: theme('colors.brand.lilium');
+        }
+    </style>
+</head>
+<body class="p-8 md:p-16">
+
+    <div class="max-w-6xl mx-auto space-y-16">
+        
+        <!-- כותרת ראשית של עמוד ה-Design System -->
+        <header class="border-b border-gray-200 pb-8">
+            <h1 class="text-4xl font-bold mb-2">מערכת עיצוב (Design System) - Portium</h1>
+            <p class="text-brand-textMuted text-lg">יישור קו מותגי לפי השפה של Lilium Solutions. שלב 1 מתוך תוכנית העבודה.</p>
+        </header>
+
+        <!-- חלק 1: הלוגו -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
+                <span class="w-8 h-8 rounded bg-brand-tech text-white flex items-center justify-center text-sm">1</span>
+                התאמת לוגו (Logo Adaptation)
+            </h2>
+            <div class="bg-white p-8 rounded-lg shadow-card border border-gray-100 flex items-center justify-center bg-gray-50">
+                <!-- עיצוב הלוגו בטיפוגרפיה נקייה כפי שנדרש -->
+                <div class="flex items-baseline gap-2 cursor-pointer select-none">
+                    <span class="text-4xl font-bold tracking-tight text-brand-lilium">Portium</span>
+                    <span class="text-sm font-medium text-brand-textMuted border-r-2 border-gray-300 pr-2 mr-2 leading-none">
+                        by <span class="text-brand-tech font-bold">Lilium</span> Solutions
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- חלק 2: פלטת צבעים -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
+                <span class="w-8 h-8 rounded bg-brand-tech text-white flex items-center justify-center text-sm">2</span>
+                פלטת צבעים (Color Palette)
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <!-- צבע ראשי -->
+                <div class="rounded-lg overflow-hidden shadow-card">
+                    <div class="h-24 bg-brand-lilium"></div>
+                    <div class="p-4 bg-white">
+                        <p class="font-bold text-sm text-brand-lilium">Lilium Blue</p>
+                        <p class="text-xs text-brand-textMuted">Primary (H1, Bg)</p>
+                        <p class="text-xs font-mono mt-1">#0A2540</p>
+                    </div>
+                </div>
+                <!-- צבע פעולה -->
+                <div class="rounded-lg overflow-hidden shadow-card">
+                    <div class="h-24 bg-brand-tech"></div>
+                    <div class="p-4 bg-white">
+                        <p class="font-bold text-sm text-brand-tech">Tech Blue / Cyan</p>
+                        <p class="text-xs text-brand-textMuted">Accent / CTA</p>
+                        <p class="text-xs font-mono mt-1">#2563EB</p>
+                    </div>
+                </div>
+                <!-- טקסט ראשי -->
+                <div class="rounded-lg overflow-hidden shadow-card">
+                    <div class="h-24 bg-brand-textMain"></div>
+                    <div class="p-4 bg-white">
+                        <p class="font-bold text-sm text-brand-textMain">Charcoal Gray</p>
+                        <p class="text-xs text-brand-textMuted">Body Text</p>
+                        <p class="text-xs font-mono mt-1">#1F2937</p>
+                    </div>
+                </div>
+                <!-- טקסט משני -->
+                <div class="rounded-lg overflow-hidden shadow-card">
+                    <div class="h-24 bg-brand-textMuted"></div>
+                    <div class="p-4 bg-white">
+                        <p class="font-bold text-sm text-brand-textMuted">Medium Gray</p>
+                        <p class="text-xs text-brand-textMuted">Subtitles / Metadata</p>
+                        <p class="text-xs font-mono mt-1">#6B7280</p>
+                    </div>
+                </div>
+                <!-- צבע רקע -->
+                <div class="rounded-lg overflow-hidden shadow-card border border-gray-200">
+                    <div class="h-24 bg-brand-bgLight"></div>
+                    <div class="p-4 bg-white border-t border-gray-100">
+                        <p class="font-bold text-sm text-gray-800">Light Slate</p>
+                        <p class="text-xs text-brand-textMuted">Section Backgrounds</p>
+                        <p class="text-xs font-mono mt-1">#F8FAFC</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- חלק 3: טיפוגרפיה -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
+                <span class="w-8 h-8 rounded bg-brand-tech text-white flex items-center justify-center text-sm">3</span>
+                טיפוגרפיה והיררכיה (Typography)
+            </h2>
+            <div class="bg-white p-8 rounded-lg shadow-card grid md:grid-cols-2 gap-12 border border-gray-100">
+                <!-- עברית -->
+                <div class="space-y-6">
+                    <div class="border-b border-gray-100 pb-2 mb-4">
+                        <span class="text-xs font-bold text-brand-tech uppercase tracking-widest">Hebrew (Assistant)</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-brand-textMuted mb-1">H1 / Bold / Leading Tight</p>
+                        <h1 class="text-4xl lg:text-5xl font-bold leading-tight">גישה חלקה לחוקרים, ניהול חכם לספרנים.</h1>
+                    </div>
+                    <div>
+                        <p class="text-xs text-brand-textMuted mb-1">H2 / Semi-Bold</p>
+                        <h2 class="text-3xl font-semibold">פתרון Enterprise מאובטח</h2>
+                    </div>
+                    <div>
+                        <p class="text-xs text-brand-textMuted mb-1">H3 / Semi-Bold</p>
+                        <h3 class="text-xl font-semibold">גישה מכל מכשיר ובכל זמן</h3>
+                    </div>
+                    <div>
+                        <p class="text-xs text-brand-textMuted mb-1">Body Text / Regular / Leading Relaxed</p>
+                        <p class="text-base leading-relaxed text-brand-textMain">
+                            מערכת Portium מספקת חוויית משתמש חלקה ומתקדמת, ומאפשרת לבתי חולים, אוניברסיטאות וארגונים רפואיים גישה מאובטחת למאגרי מידע מכל מקום.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- אנגלית -->
+                <div class="space-y-6" dir="ltr">
+                    <div class="border-b border-gray-100 pb-2 mb-4">
+                        <span class="text-xs font-bold text-brand-tech uppercase tracking-widest">English (Inter)</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-brand-textMuted mb-1">H1 / Bold / Leading Tight</p>
+                        <h1 class="text-4xl lg:text-5xl font-bold leading-tight">Seamless Access, Smart Management.</h1>
+                    </div>
+                    <div>
+                        <p class="text-xs text-brand-textMuted mb-1">H2 / Semi-Bold</p>
+                        <h2 class="text-3xl font-semibold">Secure Enterprise Solution</h2>
+                    </div>
+                    <div>
+                        <p class="text-xs text-brand-textMuted mb-1">H3 / Semi-Bold</p>
+                        <h3 class="text-xl font-semibold">Access from any device, anywhere</h3>
+                    </div>
+                    <div>
+                        <p class="text-xs text-brand-textMuted mb-1">Body Text / Regular / Leading Relaxed</p>
+                        <p class="text-base leading-relaxed text-brand-textMain">
+                            Portium provides an advanced user experience, enabling hospitals, universities, and medical organizations secure access to databases from anywhere.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- חלק 4: כפתורים ואלמנטים (UI Components) -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
+                <span class="w-8 h-8 rounded bg-brand-tech text-white flex items-center justify-center text-sm">4</span>
+                סגנונות גלובליים ומיקרו-אינטראקציות (Global Styles & UI)
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- כפתורים -->
+                <div class="bg-white p-8 rounded-lg shadow-card border border-gray-100">
+                    <h3 class="text-lg font-semibold mb-6 border-b pb-2">מצבי כפתורים (Buttons)</h3>
+                    <div class="flex flex-col gap-6 items-start">
+                        
+                        <!-- Primary CTA -->
+                        <div>
+                            <p class="text-xs text-brand-textMuted mb-2">Primary CTA (Tech Blue)</p>
+                            <button class="bg-brand-tech text-white font-medium py-3 px-6 rounded-md hover:bg-brand-techHover hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 outline-none focus:ring-4 focus:ring-blue-300">
+                                Book a Demo
+                            </button>
+                        </div>
+
+                        <!-- Secondary Button -->
+                        <div>
+                            <p class="text-xs text-brand-textMuted mb-2">Secondary (Lilium Blue)</p>
+                            <button class="bg-brand-lilium text-white font-medium py-3 px-6 rounded-md hover:bg-gray-800 hover:shadow-lg transition-all duration-200 outline-none focus:ring-4 focus:ring-gray-300">
+                                קרא עוד על הפתרון
+                            </button>
+                        </div>
+
+                        <!-- Outline Button -->
+                        <div>
+                            <p class="text-xs text-brand-textMuted mb-2">Outline / Ghost</p>
+                            <button class="border-2 border-brand-lilium text-brand-lilium font-medium py-2.5 px-6 rounded-md hover:bg-brand-bgLight transition-colors duration-200 outline-none focus:ring-4 focus:ring-gray-200">
+                                התחברות למערכת
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- כרטיסיות ומצבי טעינה -->
+                <div class="space-y-8">
+                    
+                    <!-- Card Example -->
+                    <div class="bg-white p-6 rounded-lg shadow-card border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
+                        <p class="text-xs text-brand-textMuted mb-3">Card-Based Design (Hover עלי)</p>
+                        <div class="w-12 h-12 rounded-full bg-brand-bgLight flex items-center justify-center mb-4 text-brand-tech">
+                            <!-- SVG Icon placeholder -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">אבטחת מידע מתקדמת</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">
+                            עמידה בתקני אבטחה מחמירים כגון ISO27001 ו-SOC2 לשמירה על נתוני הארגון בצורה אופטימלית.
+                        </p>
+                    </div>
+
+                    <!-- Loading Skeleton -->
+                    <div class="bg-white p-6 rounded-lg shadow-card border border-gray-100">
+                        <p class="text-xs text-brand-textMuted mb-3">Loading Skeleton (מצב טעינה)</p>
+                        <div class="animate-pulse flex space-x-4 space-x-reverse">
+                            <div class="rounded-full bg-gray-200 h-10 w-10"></div>
+                            <div class="flex-1 space-y-4 py-1">
+                                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                                <div class="space-y-2">
+                                    <div class="h-3 bg-gray-200 rounded"></div>
+                                    <div class="h-3 bg-gray-200 rounded w-5/6"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
